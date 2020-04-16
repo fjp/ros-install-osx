@@ -1,5 +1,5 @@
---- CMakeLists.txt	2020-03-27 22:19:28.000000000 -0400
-+++ CMakeLists.txt	2020-03-27 22:21:34.000000000 -0400
+--- CMakeLists.txt	2020-03-20 04:46:37.000000000 +0100
++++ CMakeLists_new.txt	2020-04-16 11:35:23.000000000 +0200
 @@ -22,12 +22,13 @@
  # Support large bags (>2GB) on 32-bit systems
  add_definitions(-D_FILE_OFFSET_BITS=64)

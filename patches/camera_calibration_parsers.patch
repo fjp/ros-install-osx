@@ -1,0 +1,20 @@
+--- CMakeLists.txt	2020-04-16 11:50:16.000000000 +0200
++++ CMakeLists_new.txt	2020-04-16 11:48:33.000000000 +0200
+@@ -5,9 +5,17 @@
+ 
+ find_package(PythonLibs REQUIRED)
+ if(PYTHONLIBS_VERSION_STRING VERSION_LESS 3)
++  if(APPLE)
++    find_package(Boost REQUIRED COMPONENTS filesystem python27)
++  else()
+     find_package(Boost REQUIRED COMPONENTS filesystem python)
++  endif()
+ else()
++  if(APPLE)
++    find_package(Boost REQUIRED COMPONENTS filesystem python)
++  else()
+     find_package(Boost REQUIRED COMPONENTS filesystem python3)
++  endif()
+ endif()
+ include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
+ 
