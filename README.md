@@ -269,3 +269,16 @@ Below are assorted tips that I have compiled for fixing any issues that can crop
 	```
 
 
+## Modifications
+
+- Remove deprecated patches and create new ones to match updated source files?
+- Required to install Homebrew Tap for `gfortran.rb` to avoid error, see [SO answer](https://stackoverflow.com/questions/55064406/installation-of-ros-kinetic-in-mac-mojave/55140779#55140779)
+- Required to install XMl::Parser using Perl 
+  1. `perl -MCPAN -e shell`
+  2. `install XML::Parser` (takes ages)
+- For gazebo to run without error: 
+```
+[qt.qpa.plugin] Could not find the Qt platform plugin "cocoa" in ""
+This application failed to start because no Qt platform plugin could be initialized. Reinstall application may fix this problem.
+```
+run `export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/local/Cellar/qt/5.14.1/plugins/platforms.` to find `libqcocoa.dylib`. See [SO](https://stackoverflow.com/questions/54297627/qt-could-not-find-the-platform-plugin-cocoa) and [this answer](https://answers.gazebosim.org/question/24832/error-when-trying-to-run-gazebo-on-macos-catalina/).
