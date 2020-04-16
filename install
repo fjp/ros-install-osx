@@ -187,47 +187,49 @@ do_install()
 
 
   # patches
+  echo "Applying patches"
+  pwd
 
   # fix roscpp trying to link against unused? boost component
-  patch -N -d src/ros_comm/roscpp/ < ../patches/roscpp.diff
-  patch -N -d src/ros_comm/message_filters/ < ../patches/message_filters.diff
+  #patch -N -d src/ros_comm/roscpp/ < ../patches/roscpp.diff
+  #patch -N -d src/ros_comm/message_filters/ < ../patches/message_filters.diff
 
   # fix tf and tf2 trying to link against unused? boost component
-  patch -N -d src/geometry/tf/ < ../patches/tf.diff
-  patch -N -d src/geometry2/tf2/ < ../patches/tf2.diff
+  #patch -N -d src/geometry/tf/ < ../patches/tf.diff
+  #patch -N -d src/geometry2/tf2/ < ../patches/tf2.diff
 
   # rosbag_strorage encryption
-  patch -N -d src/ros_comm/rosbag_storage/ < ../patches/rosbag_storage.diff
+  #patch -N -d src/ros_comm/rosbag_storage/ < ../patches/rosbag_storage.diff
   if [ ! -d /usr/local/include/openssl ]; then
     ln -s /usr/local/opt/openssl/include/* /usr/local/include/
   fi
 
   # fix boost components in camera_calibration_parsers
-  patch -N -d src/image_common/camera_calibration_parsers/ < ../patches/camera_calibration_parsers.diff
+  #patch -N -d src/image_common/camera_calibration_parsers/ < ../patches/camera_calibration_parsers.diff
 
   # fix boost components in camera_calibration_parsers
-  patch -N -d src/vision_opencv/cv_bridge/ < ../patches/cv_bridge.diff
+  #patch -N -d src/vision_opencv/cv_bridge/ < ../patches/cv_bridge.diff
 
   # add pango to image_view
-  patch -N -d src/image_pipeline/image_view/ < ../patches/image_view.diff
+  #patch -N -d src/image_pipeline/image_view/ < ../patches/image_view.diff
 
   # fix find flann library in pcl so pcl_ros can build
   # (https://stackoverflow.com/questions/53776238/building-point-cloud-library-pcl-on-macos-x-mojave-error-ld-library-not-foun)
-  patch -N -d /usr/local/share/pcl-1.9/Modules/ < ../patches/FindFLANN.diff
+  #patch -N -d /usr/local/share/pcl-1.9/Modules/ < ../patches/FindFLANN.diff
 
   # fix ros_controllers not finding class_loader and console_bridge
-  patch -N -d src/ros_controllers/position_controllers/ < ../patches/position_controllers.diff 
-  patch -N -d src/ros_controllers/diff_drive_controller/ < ../patches/diff_drive_controller.diff 
+  ##patch -N -d src/ros_controllers/position_controllers/ < ../patches/position_controllers.diff 
+  #patch -N -d src/ros_controllers/diff_drive_controller/ < ../patches/diff_drive_controller.diff 
 
   # patch rospy to fix mac specific errors (https://github.com/ros/ros_comm/pull/1904)
-  patch -p1 -d src/ros_comm < ../patches/rospy_kqueue.patch 
-  patch -p1 -d src/ros_comm < ../patches/rospy_exception.patch 
+  #patch -p1 -d src/ros_comm < ../patches/rospy_kqueue.patch 
+  #patch -p1 -d src/ros_comm < ../patches/rospy_exception.patch 
 
   # fix rqt_reconfigure not showing up in rqt_gui
-  patch -N -d src/rqt_reconfigure/ < ../patches/rqt_reconfigure.diff
+  #patch -N -d src/rqt_reconfigure/ < ../patches/rqt_reconfigure.diff
 
   # fix rqt_launch not showing up in rqt_gui
-  patch -N -d src/rqt_launch/ < ../patches/rqt_launch.diff
+  #patch -N -d src/rqt_launch/ < ../patches/rqt_launch.diff
 
   # Clean out or create the install directory.
   if [ -d ${ROS_INSTALL_DIR} ]; then
@@ -251,6 +253,7 @@ do_install()
       -DPYTHON_LIBRARY=$(python2 -c "import sys; print sys.prefix")/lib/libpython2.7.dylib \
       -DPYTHON_INCLUDE_DIR=$(python2 -c "import sys; print sys.prefix")/include/python2.7 \
       -DBoost_NO_BOOST_CMAKE=ON
+      #-DCMAKE_MACOSX_RPATH=ON 
   catkin build
 
   echo "Installation successful, please source the ROS workspace:"
